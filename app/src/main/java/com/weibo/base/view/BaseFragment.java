@@ -24,7 +24,9 @@ public abstract class BaseFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(getLayoutId(),container,false);
         initView();
-        loadData();
+        if (getUserVisibleHint()){
+            loadData();
+        }
         return view;
     }
 
