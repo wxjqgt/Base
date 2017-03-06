@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -29,6 +30,24 @@ public abstract class BaseActivity extends AppCompatActivity {
         initView();
         loadData();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finishAndRemoveActivity(this);
+    }
+
+    public static void finishAndRemoveActivity(Activity activity){
+        Iterator<Activity> iterator = ActivityHelp.activities.iterator();
+        while (iterator.hasNext()){
+            Activity iter = iterator.next();
+            if (iter == activity){
+                iter.finish();
+                iterator.remove();
+                return;
+            }
+        }
     }
 
     public static void finishAllActivity(){
