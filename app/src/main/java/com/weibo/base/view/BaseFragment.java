@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 
 import com.weibo.base.util.ViewUtil;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -53,8 +55,8 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract int getLayoutId();
 
-    protected View findView(int id) {
-        return ViewUtil.findView(view, id);
+    protected <T extends View> T findView(int id) {
+        return (T) view.findViewById(id);
     }
 
 }
